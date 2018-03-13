@@ -6,11 +6,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def init_github
-      #this will help DRY up the sessions and repo controllers by making this a before_action
-      @github ||= GithubService.new({access_token: session[:token]})
-    end
-
     def authenticate_user
       redirect_to "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT']}&scope=repo" if !logged_in?
     end
